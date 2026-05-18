@@ -1,6 +1,6 @@
 # Design Memphis — Session Memory
 
-Last updated: April 26, 2026
+Last updated: May 18, 2026
 
 ---
 
@@ -15,11 +15,17 @@ This is the **The Life Church Design Memphis** team workspace, built on the WAT 
 ### What it does
 Pulls open tasks from ClickUp across **all spaces** (not just Creative Memphis) assigned to the design team, filters to overdue + due this week (Mon–Sun), and generates a clean HTML report grouped by team member.
 
-### Live URL
-**https://brianpitre.github.io/design-team-production-process/weekly_report.html**
+### Live URLs (current — `tlcdesignai/reports`)
+- Designers: **https://tlcdesignai.github.io/reports/weekly_report.html**
+- Leaders:   **https://tlcdesignai.github.io/reports/weekly_leaders_report.html**
+- Index:     **https://tlcdesignai.github.io/reports/**
 
-GitHub repo: `https://github.com/brianpitre/design-team-production-process`
+GitHub repo: `https://github.com/tlcdesignai/reports` (remote name `tlcdesignai`)
 Branch: `main` — GitHub Pages serves from root.
+
+**Push target moved (May 18, 2026):** the old `brianpitre/design-team-production-process` remote (still present as `origin`) returns 403 — keychain creds are now scoped to `tlcdesignai`. Always push with `git push tlcdesignai claude/<branch>:main`. The old Pages URL under `brianpitre.github.io` is stale.
+
+**Rebase gotcha:** when conflicts hit on the HTML reports during a rebase onto `tlcdesignai/main`, the freshly-generated version is `--theirs` (the commit being replayed), NOT `--ours` (which is upstream/last week). Either run `git checkout --theirs` on both reports, or simpler: `git rebase --abort`, regenerate after rebasing the clean branch, then commit on top.
 
 ### How to run
 ```bash
@@ -32,9 +38,9 @@ python3 tools/fetch_weekly_tasks.py --next-week
 python3 tools/generate_weekly_report.py
 
 # Then push to update the live page
-git add tools/fetch_weekly_tasks.py weekly_report.html
-git commit -m "Update weekly report for [date range]"
-git push
+git add weekly_report.html weekly_leaders_report.html
+git commit -m "Update weekly reports for [date range]"
+git push tlcdesignai HEAD:main
 ```
 
 ### Files
