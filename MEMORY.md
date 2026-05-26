@@ -1,6 +1,6 @@
 # Design Memphis — Session Memory
 
-Last updated: May 18, 2026
+Last updated: May 26, 2026
 
 ---
 
@@ -23,7 +23,9 @@ Pulls open tasks from ClickUp across **all spaces** (not just Creative Memphis) 
 GitHub repo: `https://github.com/tlcdesignai/reports` (remote name `tlcdesignai`)
 Branch: `main` — GitHub Pages serves from root.
 
-**Push target moved (May 18, 2026):** the old `brianpitre/design-team-production-process` remote (still present as `origin`) returns 403 — keychain creds are now scoped to `tlcdesignai`. Always push with `git push tlcdesignai claude/<branch>:main`. The old Pages URL under `brianpitre.github.io` is stale.
+**Push target moved (May 18, 2026):** the old `brianpitre/design-team-production-process` remote (still present as `origin`) returns 403. Always push with `git push tlcdesignai claude/<branch>:main`. The old Pages URL under `brianpitre.github.io` is stale.
+
+**Both gh accounts are logged in** (`brianpitre` and `tlcdesignai`). Whichever is `Active account: true` is what git uses for HTTPS pushes. If the push 403s, run `gh auth status` to see which is active, then `gh auth switch -u tlcdesignai` before retrying. The active account may have flipped back to `brianpitre` since last session.
 
 **Rebase gotcha:** when conflicts hit on the HTML reports during a rebase onto `tlcdesignai/main`, the freshly-generated version is `--theirs` (the commit being replayed), NOT `--ours` (which is upstream/last week). Either run `git checkout --theirs` on both reports, or simpler: `git rebase --abort`, regenerate after rebasing the clean branch, then commit on top.
 
